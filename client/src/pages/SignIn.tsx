@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Paper,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/actions';

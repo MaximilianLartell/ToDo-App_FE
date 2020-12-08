@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import { Grid, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { connectSocket } from '../service/eventEmitters';
-import { Events, List, User, RootState } from '../types';
-import { isSocket } from '../types/typeGuards';
-import {
-  setUser,
-  addCreatedList,
-  setCreatedLists,
-  removeList,
-} from '../store/actions';
+import { List, RootState } from '../types';
+import { setCreatedLists } from '../store/actions';
 import { fetchLists } from '../service/fetch';
 import ListList from '../components/ListList';
 import AddList from '../components/AddList';
@@ -22,7 +15,7 @@ export default function MainPage(): React.ReactElement {
   const { user, socket } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    if (user.userId !== '') {
+    if (user.userId !== '' || user.createdLists.length === 0) {
       const listIds = user.createdLists.toString();
       fetchLists(`/api/lists/${listIds}`, (data: List[]) =>
         dispatch(setCreatedLists(data))
@@ -34,17 +27,8 @@ export default function MainPage(): React.ReactElement {
     if (!socket.connected) {
       connectSocket(dispatch);
     }
-    if (isSocket(socket)) {
-      socket.on(Events.CREATE_LIST, (list: List, user: User) => {
-        dispatch(setUser(user));
-        dispatch(addCreatedList(list));
-      });
-      socket.on(Events.REMOVE_LIST, (list: List) => {
-        console.log('ping', list);
-        dispatch(removeList(list));
-      });
-    }
   }, [socket]);
+
   return (
     <div>
       <Grid

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Paper,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/actions';
@@ -43,73 +45,75 @@ export default function SignUp(): React.ReactElement {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <Paper className='signUpWrapper'>
-        <Typography component='h1' variant='h5'>
-          Sign up
-        </Typography>
-        <Typography component='p' variant='subtitle1' color='error'>
-          {error}
-        </Typography>
+    <div>
+      <Container component='main' maxWidth='xs'>
+        <CssBaseline />
+        <Paper className='signUpWrapper'>
+          <Typography component='h1' variant='h5'>
+            Sign up
+          </Typography>
+          <Typography component='p' variant='subtitle1' color='error'>
+            {error}
+          </Typography>
 
-        <form className='signUpForm' noValidate>
-          <div className='signUpTextField'>
-            <TextField
-              name='userName'
-              variant='outlined'
-              required
-              fullWidth
-              id='userName'
-              label='Username'
-              autoFocus
-              placeholder='Username'
-              value={userName}
-              onChange={(e) => {
-                e.preventDefault();
-                handleChange(e.target.name, e.target.value);
-              }}
-            />
-          </div>
-          <div className='signUpTextField'>
-            <TextField
-              className='signUpTextField'
-              variant='outlined'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => {
-                e.preventDefault();
-                handleChange(e.target.name, e.target.value);
-              }}
-            />
-          </div>
-          <div className='signUpButton'>
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='primary'
-              onClick={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
-            >
-              Sign Up
-            </Button>
-          </div>
-          <div className='signInLink'>
-            <Link href='/sign-in' variant='body2'>
-              Already have an account? Sign in
-            </Link>
-          </div>
-        </form>
-      </Paper>
-    </Container>
+          <form className='signUpForm' noValidate>
+            <div className='signUpTextField'>
+              <TextField
+                name='userName'
+                variant='outlined'
+                required
+                fullWidth
+                id='userName'
+                label='Username'
+                autoFocus
+                placeholder='Username'
+                value={userName}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleChange(e.target.name, e.target.value);
+                }}
+              />
+            </div>
+            <div className='signUpTextField'>
+              <TextField
+                className='signUpTextField'
+                variant='outlined'
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                placeholder='Password'
+                value={password}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleChange(e.target.name, e.target.value);
+                }}
+              />
+            </div>
+            <div className='signUpButton'>
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                color='primary'
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
+              >
+                Sign Up
+              </Button>
+            </div>
+            <div className='signInLink'>
+              <Link href='/sign-in' variant='body2'>
+                Already have an account? Sign in
+              </Link>
+            </div>
+          </form>
+        </Paper>
+      </Container>
+    </div>
   );
 }

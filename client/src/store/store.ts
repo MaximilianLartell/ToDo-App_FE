@@ -1,19 +1,5 @@
-import { createStore, combineReducers, compose } from 'redux';
-import {
-  userReducer,
-  socketReducer,
-  createdListsReducer,
-  currentListReducer,
-  itemsReducer,
-} from './reducers';
-
-export const rootReducer = combineReducers({
-  user: userReducer,
-  socket: socketReducer,
-  createdLists: createdListsReducer,
-  currentList: currentListReducer,
-  items: itemsReducer,
-});
+import { createStore, compose } from 'redux';
+import rootReducer from './reducers/index';
 
 declare global {
   interface Window {

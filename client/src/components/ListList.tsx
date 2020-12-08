@@ -1,32 +1,36 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  IconButton,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../types';
+import { RootState, ListId, List as ListType } from '../types';
 import { deleteList } from '../service/eventEmitters';
 
 export default function ListList(): React.ReactElement {
   const history = useHistory();
-  const { createdLists, socket } = useSelector((state: RootState) => state);
+  const { createdLists, socket, user } = useSelector(
+    (state: RootState) => state
+  );
 
   const selectList = (id: string) => {
     history.push(`/list?listId=${id}`);
   };
 
-  const listItem = (listName: string, id: string): React.ReactElement => {
+  const listItem = (listName: string, listId: ListId): React.ReactElement => {
     return (
       <ListItem
-        key={id}
+        key={listId + listName}
         button
         onClick={() => {
-          selectList(id);
+          selectList(listId);
         }}
       >
         <ListItemText primary={listName} />
@@ -35,7 +39,7 @@ export default function ListList(): React.ReactElement {
             edge='end'
             aria-label='delete'
             onClick={() => {
-              deleteList(socket, id);
+              deleteList(socket, listId, user);
             }}
           >
             <DeleteIcon />
@@ -53,15 +57,11 @@ export default function ListList(): React.ReactElement {
         </Typography>
         <div className='demo'>
           <List>
-            {createdLists.map((el) => listItem(el.listName, el.listId))}
+            {createdLists.map((el: ListType) =>
+              listItem(el.listName, el.listId)
+            )}
           </List>
         </div>
-        {/* <Typography variant='h6' className={classes.title}>
-          My SubscribedLists
-        </Typography>
-        <div className={classes.demo}>
-          <List>{lists.map((el) => listItem(el.listName, el.listId))}</List>
-        </div> */}
       </Grid>
     </div>
   );

@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import { Grid, Paper } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ListForm from '../components/ListForm';
 import ItemList from '../components/ItemList';
 import { fetchLists, fetchItems } from '../service/fetch';
-import { connectSocket } from '../service/eventEmitters';
-import { RootState, Events, List, Item } from '../types';
+import { connectSocket, joinList } from '../service/eventEmitters';
+import { RootState, List, Item } from '../types';
 import { isSocket } from '../types/typeGuards';
-import {
-  setCurrentList,
-  setItems,
-  addItem,
-  updateItem,
-  removeItem,
-} from '../store/actions';
+import { setCurrentList, setItems } from '../store/actions';
 import './ListPage.css';
 
 function ListPage(): React.ReactElement {
   const { search } = useLocation();
   const dispatch = useDispatch();
-  const { socket, user, currentList } = useSelector(
-    (state: RootState) => state
-  );
+  const { socket, user } = useSelector((state: RootState) => state);
   const [error, setError] = useState<string | undefined>();
   const listId = new URLSearchParams(search).get('listId');
 
@@ -55,20 +46,10 @@ function ListPage(): React.ReactElement {
     if (!socket.connected) {
       connectSocket(dispatch);
     }
-    if (isSocket(socket)) {
-      socket.emit(Events.JOIN_LIST, listId);
-      socket.on(Events.NEW_ITEM, (newItem: Item, list: List) => {
-        dispatch(setCurrentList({ ...currentList, ...list }));
-        dispatch(addItem(newItem));
-      });
-      socket.on(Events.TOGGLE_DONE, (newItem: Item) => {
-        dispatch(updateItem([newItem]));
-      });
-      socket.on(Events.REMOVE_ITEM, (item: Item) => {
-        dispatch(removeItem([item]));
-      });
+    if (isSocket(socket) && listId) {
+      joinList(socket, listId);
     }
-  }, [socket]);
+  }, [socket, listId]);
 
   return (
     <div>

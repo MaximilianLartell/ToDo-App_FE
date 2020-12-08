@@ -1,12 +1,11 @@
 import io from 'socket.io-client';
 import { Dispatch } from 'redux';
 import { PATH } from '../config';
-import { Events, Socket, DefaultSocket } from '../types';
+import { Events, Socket, DefaultSocket, User, ListId } from '../types';
 import { isSocket } from '../types/typeGuards';
 import { setSocket } from '../store/actions';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const connectSocket = (dispatch: Dispatch<any>): void => {
+export const connectSocket = (dispatch: Dispatch): void => {
   const socket = io(PATH);
   socket.on('connect', () => {
     dispatch(setSocket(socket));
@@ -20,6 +19,15 @@ export const createList = (
 ): void => {
   if (isSocket(socket)) {
     socket.emit(Events.CREATE_LIST, { listName, creatorId });
+  }
+};
+
+export const joinList = (
+  socket: Socket | DefaultSocket,
+  listId: ListId
+): void => {
+  if (isSocket(socket)) {
+    socket.emit(Events.JOIN_LIST, listId);
   }
 };
 
@@ -55,9 +63,10 @@ export const deleteItem = (
 
 export const deleteList = (
   socket: Socket | DefaultSocket,
-  listId: string
+  listId: ListId,
+  user: User
 ): void => {
   if (isSocket(socket)) {
-    socket.emit(Events.REMOVE_LIST, listId);
+    socket.emit(Events.REMOVE_LIST, listId, user);
   }
 };

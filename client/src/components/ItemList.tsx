@@ -1,16 +1,18 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  IconButton,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../types';
+import { RootState, Item } from '../types';
 import { updateItem } from '../store/actions';
 import { toggleDone, deleteItem } from '../service/eventEmitters';
 
@@ -21,7 +23,7 @@ export default function ItemList(): React.ReactElement {
   );
 
   const handleToggle = (id: string) => {
-    const newItem = items.find((i) => i.itemId === id);
+    const newItem = items.find((i: Item) => i.itemId === id);
     if (newItem) {
       dispatch(updateItem([{ ...newItem, done: !newItem.done }]));
     }
@@ -63,15 +65,17 @@ export default function ItemList(): React.ReactElement {
   const render = () => {
     if (currentList.displayOpt === 'PENDING') {
       return items
-        .filter((item) => item.done === false)
-        .map((el) => listItem(el.description, el.itemId, el.done));
+        .filter((item: Item) => item.done === false)
+        .map((el: Item) => listItem(el.description, el.itemId, el.done));
     }
     if (currentList.displayOpt === 'DONE') {
       return items
-        .filter((item) => item.done === true)
-        .map((el) => listItem(el.description, el.itemId, el.done));
+        .filter((item: Item) => item.done === true)
+        .map((el: Item) => listItem(el.description, el.itemId, el.done));
     }
-    return items.map((el) => listItem(el.description, el.itemId, el.done));
+    return items.map((el: Item) =>
+      listItem(el.description, el.itemId, el.done)
+    );
   };
 
   return (

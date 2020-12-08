@@ -1,20 +1,18 @@
-import { rootReducer } from '../store/store';
+import rootReducer from '../store/reducers';
 
 export type UserId = string;
 export type ListId = string;
-type ItemId = string;
+export type ItemId = string;
 export type UserName = string;
-type Online = boolean;
 type ListName = string;
 type Description = string;
-type Done = boolean;
 
 export interface User {
   readonly userId: UserId;
   userName: UserName;
   createdLists: ListId[];
   subscribedLists: ListId[];
-  online: Online;
+  online: boolean;
 }
 
 export interface List {
@@ -36,18 +34,13 @@ export interface Item {
   readonly creatorId: UserId;
   description: Description;
   listId: ListId;
-  done: Done;
+  done: boolean;
 }
 
 export interface ErrorMessage {
   type: 'Error';
   message: string;
 }
-
-export type UserContextType = {
-  user: User;
-  setUser: (user: User) => void;
-};
 
 export type Socket = SocketIOClient.Socket;
 export type DefaultSocket = {
@@ -130,12 +123,12 @@ export interface RemoveItem {
 }
 
 export type NewSocket = {
-  type: 'NEW_SOCKET';
+  type: typeof NEW_SOCKET;
   payload: Socket;
 };
 
 export type DisconnectSocket = {
-  type: 'DISCONNECT';
+  type: typeof DISCONNECT;
   payload: DefaultSocket;
 };
 
