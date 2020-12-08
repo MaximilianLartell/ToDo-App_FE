@@ -1,4 +1,9 @@
-export const NODE_ENV = process.env.NODE_ENV || 'development';
+// const NODE_ENV = process.env.NODE_ENV || 'development';
 
-export const PATH =
-  NODE_ENV === 'development' ? 'http://localhost:8000' : 'some heroku adress';
+export default 'nuttin';
+
+// const localPath = 'http://localhost:8000';
+const externalPath = 'https://maximilian-reminder.herokuapp.com';
+
+export const PATH = externalPath;
+//   NODE_ENV === 'development' ? 'http://localhost:8000' : 'some heroku adress';

@@ -1,0 +1,46 @@
+.addListForm {
+  margin: 100px 0 20px 0;
+  text-align: center;
+}
+
+.addListPaper {
+  padding: 40px 0;
+}
+
+.listWrapper {
+  margin: 0px;
+  text-align: center;
+}
+
+.listPaper {
+  min-height: 400px;
+  padding: 40px 0;
+}
+
+.listListWrapper {
+  margin-top: 50px;
+}
+
+@media only screen and (min-width: 480px) {
+  .addListForm {
+    margin: 100px auto 20px auto;
+    width: 480px;
+  }
+  .listWrapper {
+    width: 480px;
+    margin: auto;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .addListForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20% 100px 20% auto;
+  }
+
+  .listWrapper {
+    margin: 50px auto 100px 100px;
+  }
+}

@@ -1,0 +1,21 @@
+.signInWrapper {
+  margin: 100px 0;
+  display: 'flex';
+  flex-direction: 'column';
+  align-items: 'center';
+  padding: 15px;
+}
+.signInForm {
+  width: '100%';
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.signInButton {
+  margin: 10px 0;
+}
+
+.signUpLink {
+  text-align: right;
+  margin-top: 20px;
+}
