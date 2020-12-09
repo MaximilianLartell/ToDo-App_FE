@@ -1,4 +1,4 @@
-import { PATH } from '../config';
+import PATH from '../config';
 import { User, ErrorMessage, List, UserName, Item } from '../types';
 
 export const fetchUser = (

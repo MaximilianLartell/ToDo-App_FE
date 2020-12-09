@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 import { Dispatch } from 'redux';
-import { PATH } from '../config';
+import PATH from '../config';
 import { Events, Socket, DefaultSocket, User, ListId } from '../types';
 import { isSocket } from '../types/typeGuards';
 import { setSocket } from '../store/actions';
