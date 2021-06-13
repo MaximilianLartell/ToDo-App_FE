@@ -1,6 +1,6 @@
-# RemindersApp_client
+# ToDo-App_FE
 
-## Client-side code for the Reminders App code test from ubiquity. Built using React and Typescript
+## Client-side code for the ToDo-App. Built using React and Typescript
 
 ### Running a local copy of the app.
 
@@ -13,7 +13,7 @@ $ npm start
 The application will start on `http://localhost:3000`.
 
 Remember to clone and start the server side part of the application aswell.
-Found here: https://github.com/MaximilianLartell/RemindersApp_Server
+Found here: https://github.com/MaximilianLartell/ToDo-App_BE
 
 ### Trying out the hosted verision on Netlify.
 
