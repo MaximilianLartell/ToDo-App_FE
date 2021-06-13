@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ListForm from '../components/ListForm';
 import ItemList from '../components/ItemList';
+import AppBar from '../components/AppBar';
 import { fetchLists, fetchItems } from '../service/fetch';
 import { connectSocket, joinList } from '../service/eventEmitters';
 import { RootState, List, Item } from '../types';
@@ -53,6 +54,7 @@ function ListPage(): React.ReactElement {
 
   return (
     <div>
+      <AppBar />
       {error ? (
         <h1>{error}</h1>
       ) : (

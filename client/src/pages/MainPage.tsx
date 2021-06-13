@@ -8,6 +8,8 @@ import { fetchLists } from '../service/fetch';
 import ListList from '../components/ListList';
 import AddList from '../components/AddList';
 import SearchList from '../components/SearchList';
+import AppBar from '../components/AppBar';
+
 import './MainPage.css';
 
 export default function MainPage(): React.ReactElement {
@@ -15,7 +17,7 @@ export default function MainPage(): React.ReactElement {
   const { user, socket } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    if (user.userId !== '' || user.createdLists.length === 0) {
+    if (user.userId !== '' || user.createdLists.length !== 0) {
       const listIds = user.createdLists.toString();
       fetchLists(`/api/lists/${listIds}`, (data: List[]) =>
         dispatch(setCreatedLists(data))
@@ -31,6 +33,7 @@ export default function MainPage(): React.ReactElement {
 
   return (
     <div>
+      <AppBar />
       <Grid
         container
         justify='center'

@@ -70,3 +70,10 @@ export const deleteList = (
     socket.emit(Events.REMOVE_LIST, listId, user);
   }
 };
+
+export const signOut = (socket: Socket | DefaultSocket, user: User): void => {
+  if (isSocket(socket)) {
+    socket.emit(Events.SIGN_OUT, user);
+    socket.close();
+  }
+};
